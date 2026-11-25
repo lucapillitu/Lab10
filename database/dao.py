@@ -29,7 +29,7 @@ class DAO:
             cursor.close()
             cnx.close()
 
-        return nodi
+        return nodi#return di una lista di filiali
 
 
     @staticmethod
@@ -61,4 +61,4 @@ class DAO:
             cursor.close()
             cnx.close()
 
-        return archi
+        return archi#lista dei collegamenti
