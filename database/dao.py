@@ -44,14 +44,14 @@ class DAO:
         cursor = cnx.cursor(dictionary=True)
         query = """SELECT LEAST(id_filiale_origine, id_filiale_destinazione) AS f1,
                         GREATEST(id_filiale_origine, id_filiale_destinazione) AS f2,
-                        AVG(importo) AS peso,
+                        AVG(importo) AS peso
                         FROM bonifico
                         GROUP BY f1, f2"""
 
         try:
             cursor.execute(query)
             for a in cursor:
-                archi.append([int(a["f1"]),int(a["f2"]),float(a["peso"])])
+                archi.append([int(a["f1"]),int(a["f2"]),int(a["peso"])])
 
 
         except Exception as e:

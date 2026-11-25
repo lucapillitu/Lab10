@@ -1,8 +1,5 @@
-from database import dao
 from database.dao import DAO
 import networkx as nx
-
-from model import filiale
 
 
 class Model:

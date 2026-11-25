@@ -24,16 +24,18 @@ class Controller:
 
         self._model.costruisci_grafo(int(valore))#costruisce il grafo effettivo in base al filtro valore
 
-        n_archi = self._model.get_num_edges()
-        self._view.lista_visualizzazione.controls.append(
-            ft.Text(f"Numero di collegamenti: {n_archi}"))
-
         n_nodi = self._model.get_num_nodes()
         self._view.lista_visualizzazione.controls.append(
             ft.Text(f"Numero di filiari: {n_nodi}"))
 
-        for f1, f2, attr in self._model.get_all_edges():
-            self._view.lista_visualizzazione.controls.append(ft.Text(f"- {f1.nome} [{f1.codice}] -> {f2.nome} [{f2.codice}], con importo bonifico medio : € {attr}"))
+        n_archi = self._model.get_num_edges()
+        self._view.lista_visualizzazione.controls.append(
+            ft.Text(f"Numero di collegamenti: {n_archi}"))
+
+
+
+        for f1, f2,peso in self._model.get_all_edges():
+            self._view.lista_visualizzazione.controls.append(ft.Text(f"- {f1.nome} [{f1.codice}] -> {f2.nome} [{f2.codice}], con importo bonifico medio : € {peso["weight"]}"))
 
 
 
