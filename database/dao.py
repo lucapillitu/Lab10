@@ -24,7 +24,7 @@ class DAO:
 
         except Exception as e:
             print(f"Errore durante la query get_nodi: {e}")
-            result = None
+            nodi = None
         finally:
             cursor.close()
             cnx.close()
