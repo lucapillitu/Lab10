@@ -4,8 +4,8 @@ import networkx as nx
 
 class Model:
     def __init__(self):
-        self._nodes = None
-        self._edges = None
+        self._nodes = None#dizionario
+        self._edges = None#lista
         self.G = nx.Graph()
 
 
@@ -16,10 +16,8 @@ class Model:
             self._nodes = DAO.get_nodi()
 
     def filiale(self,id):#da cambiare in un dizionario
-        for f in self._nodes:
-            if f.id == id:
-                return f
-        return None
+        return self._nodes[id]
+
 
 
     def costruisci_grafo(self, threshold):
@@ -31,7 +29,7 @@ class Model:
         self.popola()
         self.G.clear()
 
-        for f in self._nodes:
+        for f in self._nodes.values():
             self.G.add_node(f)
 
         #aggiungo tutti i nodi filtrati

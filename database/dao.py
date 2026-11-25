@@ -6,7 +6,7 @@ class DAO:
     @staticmethod
     def get_nodi():
         cnx = DBConnect.get_connection()
-        nodi =[]
+        nodi ={}
 
         if cnx is None :
             print("errore di connessione al DB")
@@ -20,7 +20,7 @@ class DAO:
                 f = Filiale(int(line["id"]),
                             line["codice"], line["nome"], line["citta"],line["provincia"],
                             float(line["latitudine"]), float(line["longitudine"]))
-                nodi.append(f)
+                nodi[int(line["id"])] = f
 
         except Exception as e:
             print(f"Errore durante la query get_nodi: {e}")
