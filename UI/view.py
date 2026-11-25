@@ -15,6 +15,7 @@ class View:
         # Controller
         self.controller = None
 
+
     def show_alert(self, messaggio):
         self.alert.show_alert(messaggio)
 
@@ -24,10 +25,17 @@ class View:
     def update(self):
         self.page.update()
 
+    def cambia_tema(self, e):
+        """ Cambia tema scuro/chiaro """
+        self.page.theme_mode = ft.ThemeMode.DARK if self.toggle_cambia_tema.value else ft.ThemeMode.LIGHT
+        self.toggle_cambia_tema.label = "Tema scuro" if self.toggle_cambia_tema.value else "Tema chiaro"
+        self.page.update()
+
+
     def load_interface(self):
         """ Crea e aggiunge gli elementi di UI alla pagina e la aggiorna. """
         # Intestazione
-        self.txt_titolo = ft.Text(value="Gestione Rete Bancaria", size=38, weight=ft.FontWeight.BOLD)
+        self.txt_titolo = ft.Text(value="Visualizzazione della Rete Bancaria", size=38, weight=ft.FontWeight.BOLD)
 
         # Importo Medio Minimo
         self.importo_medio_minimo = ft.TextField(label="Importo medio minimo (€)", width=300)
@@ -64,8 +72,4 @@ class View:
         self.page.scroll = "adaptive"
         self.page.update()
 
-    def cambia_tema(self, e):
-        """ Cambia tema scuro/chiaro """
-        self.page.theme_mode = ft.ThemeMode.DARK if self.toggle_cambia_tema.value else ft.ThemeMode.LIGHT
-        self.toggle_cambia_tema.label = "Tema scuro" if self.toggle_cambia_tema.value else "Tema chiaro"
-        self.page.update()
+
