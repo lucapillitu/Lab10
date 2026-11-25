@@ -16,14 +16,22 @@ class Controller:
            * Lista di Collegamenti che superano l'importo indicato come soglia
            """
     def mostra_collegamenti(self, e):
-        valore = self._view.importo_medio_minimo.value
 
-        if valore is None or not int(valore) or int(valore)<=0:
-            self._view.show_alert("inserisci un valore adeguato ad un bonifico")
+        valore = self._view.importo_medio_minimo.value
+        if valore is None or valore.strip() == "":
+            self._view.show_alert("Inserire un valore nella casella di testo")
+            return
+        try:
+            val = float(valore.replace(",", "."))
+        except ValueError:
+            self._view.show_alert("Inserire un numero valido nella casella di testo")
+            return
+        if val <= 0:
+            self._view.show_alert("Il valore deve essere positivo nella casella di testo")
             return
 
-        self._model.costruisci_grafo(int(valore))#costruisce il grafo effettivo in base al filtro valore
-
+        self._view.lista_visualizzazione.controls.clear()
+        self._model.costruisci_grafo(val)#costruisce il grafo effettivo in base al filtro valore
         n_nodi = self._model.get_num_nodes()
         self._view.lista_visualizzazione.controls.append(
             ft.Text(f"Numero di filiari: {n_nodi}"))
@@ -36,8 +44,8 @@ class Controller:
         for f1, f2,peso in self._model.get_all_edges():
             self._view.lista_visualizzazione.controls.append(ft.Text(f"- {f1.nome} [{f1.codice}] "
                                                                      f"-> {f2.nome} [{f2.codice}], "
-                                                                     f"con importo bonifico medio : € {peso["weight"]}"))
-
+                                                                     f"con importo bonifico medio : € {peso['weight']}"))
+        self._view.update()
 
 
 

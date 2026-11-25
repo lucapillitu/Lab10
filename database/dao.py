@@ -51,7 +51,7 @@ class DAO:
         try:
             cursor.execute(query)
             for a in cursor:
-                archi.append([int(a["f1"]),int(a["f2"]),int(a["peso"])])
+                archi.append([int(a["f1"]),int(a["f2"]),float(a["peso"])])
 
 
         except Exception as e:
